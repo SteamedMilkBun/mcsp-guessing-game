@@ -1,3 +1,6 @@
+//prompt for global variable name
+const name = prompt('Please enter your name');
+
 //prompt for and store input value
 let guessOnce = function guessOnce() {
     console.log("Entering f: guessOnce");
@@ -73,25 +76,42 @@ let compare = function(fn1, fn2) {
         guessContainer = guessNContainerArr[1];
         console.log(`Received guess: ${guess} and guessContainer: ${guessContainer} from f: getAndconcatGuess`);
         //compare result of guessOnce to result of generateNum
-        console.log(`Guess: ${guess} !== targetNum: ${targetNum}. Guess again.`);
         //prompt for new guess and compare to targetNum again)
         if (guess < targetNum) {
-            alert(`Higher, ${guess} is too low!`);
+            alert(`Sorry ${name}, guess higher, ${guess} is too low!`);
         } else if (guess > targetNum) {
-            alert(`Lower, ${guess} is too high!`);
+            alert(`Sorry ${name}, guess lower, ${guess} is too high!`);
         }
     }
     //if guess === targetNum, alert "Correct!"
-    alert(`Correct! Your previous guesses were${guessContainer}!`);
+    alert(`That's correct, ${name}! Your previous guesses were${guessContainer}!`);
     console.log("Exiting f: compare");
 }
 
+//This function asks the player whether or not they want to replay
+let playAgain = function () {
+    console.log('Entering f: playAgain');
+    let response = prompt('Play again? Type yes or no');
+    if (response.toLowerCase() === 'yes') {
+        console.log(`You responded ${response.toLowerCase()}, play again`);
+        play();
+    } else if (response.toLowerCase() === 'no') {
+        console.log(`You responded ${response.toLowerCase()}, don't play again`);
+    }
+    console.log('Exiting f: playAgain');
+}
+
 function play() {
+    let playing = true;//flag to indicate player is playing
     console.log('Entering f: play');
     //console.log('\tExecuting f: play()');
     console.log('Calling f: compare');
     compare(getAndconcatGuess, generateNum);
     console.log('Exiting f: play');
+    playing = false;//flag to indicate player done playing
+    console.log('Calling f: playAgain')
+    playAgain();//function asks if want replay
 }
+
 
 
